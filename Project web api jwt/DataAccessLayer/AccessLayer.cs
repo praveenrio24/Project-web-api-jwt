@@ -33,6 +33,7 @@ namespace Project_web_api_jwt.DataAccessLayer
             tbl_Praveen_Employee tbl = new tbl_Praveen_Employee();
             List<string> list = new List<string>();
             Hashtable hashtable = new Hashtable();
+            Hashtable hashtable1 = new Hashtable();
            
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM tbl_Praveen_Employee WHERE Email = '" + login.Email + "' ", con);
             DataTable dt = new DataTable();
@@ -52,12 +53,27 @@ namespace Project_web_api_jwt.DataAccessLayer
                     hashtable.Add("firstName", tbl.firstName);
                     hashtable.Add("lastName", tbl.lastName);
                     hashtable.Add("email", tbl.email);
+                    hashtable1.Add("ErrorText", "success ");
+                    hashtable1.Add("ErrorCode", "successfull");
+                    hashtable1.Add("FieldName", "null");
+                    hashtable1.Add("Fielvalue", "null");
+                    
 
-                    return new Result { rcode = 200, robj = hashtable, reqID = Guid.NewGuid() };
+
+                    return new Result { rcode = 200, robj = hashtable, reqID = Guid.NewGuid(),rmsg=hashtable1 };
 
                 }
                 else
                 {
+                    result.rcode = 500;
+                    result.reqID = Guid.NewGuid();
+                    result.trnID = "E-AAA0001";
+                    result.robj = null;
+                    hashtable1.Add("ErrorText", "ERR10001");
+                    hashtable1.Add("ErrorCode", "Something went wrong");
+                    hashtable1.Add("FieldName", "null");
+                    hashtable1.Add("Fielvalue", "null");
+                    result.rmsg = hashtable1;
 
                 }
 

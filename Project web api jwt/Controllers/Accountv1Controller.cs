@@ -5,6 +5,7 @@ using Project_web_api_jwt.DataAccessLayer;
 using Project_web_api_jwt.Models;
 using Project_web_api_jwt.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -32,18 +33,22 @@ namespace Project_web_api_jwt.Controllers
         public Result Login(Login login)
         {
             Result result = new Result();
-            Hashta
-            
-
-
+            Hashtable hashtable = new Hashtable();
             try
             {
                 if (login.Email == null)
                 {
                     result.rcode = 501;
                     result.reqID = Guid.NewGuid();
-                    result.trnID = "E-AAA0001";
-                   
+                    result.trnID = "ERR008 ";
+                    hashtable.Add("ErrorText", "Email is required");
+                    hashtable.Add("ErrorCode", "ERR008 ");
+                    hashtable.Add("FieldName", "null");
+                    hashtable.Add("Fielvalue", "null");
+                    result.rmsg = hashtable;
+
+
+
                 }
                 else
                 {
@@ -51,8 +56,13 @@ namespace Project_web_api_jwt.Controllers
                     {
                         result.rcode = 500;
                         result.reqID = Guid.NewGuid();
-                        result.trnID = "E-AAA0001";
-                       
+                        result.trnID = "ERR007 ";
+                        hashtable.Add("ErrorText", "ERR007 ");
+                        hashtable.Add("ErrorCode", "Password is required ");
+                        hashtable.Add("FieldName", "null");
+                        hashtable.Add("Fielvalue", "null");
+                        result.rmsg = hashtable;
+
 
                     }
                     else
@@ -65,8 +75,12 @@ namespace Project_web_api_jwt.Controllers
                         {
                             result.rcode = 500;
                             result.reqID = Guid.NewGuid();
-                            result.trnID = "E-AAA0001";
-                          
+                            result.trnID = "ERR009 ";
+                            hashtable.Add("ErrorText", "ERR009");
+                            hashtable.Add("ErrorCode", "Email is invalid");
+                            hashtable.Add("FieldName", "null");
+                            hashtable.Add("Fielvalue", "null");
+                            result.rmsg = hashtable;
 
                         }
                         else
@@ -79,8 +93,13 @@ namespace Project_web_api_jwt.Controllers
                                 result.rcode = 500;
                                 result.reqID = Guid.NewGuid();
                                 result.trnID = "E-AAA0001";
-                                
-                              
+                                hashtable.Add("ErrorText", "ERR007 ");
+                                hashtable.Add("ErrorCode", "Password must be one char, one special char and one numeric.");
+                                hashtable.Add("FieldName", "null");
+                                hashtable.Add("Fielvalue", "null");
+                                result.rmsg = hashtable;
+
+
 
 
                             }

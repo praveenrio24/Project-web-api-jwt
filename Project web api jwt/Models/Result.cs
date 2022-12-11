@@ -13,7 +13,7 @@ namespace Project_web_api_jwt.Models
 
         public  Object robj { get; set; }
 
-        public object rmsg { get; set; }
+       public object rmsg { get; set; }
 
 
 
