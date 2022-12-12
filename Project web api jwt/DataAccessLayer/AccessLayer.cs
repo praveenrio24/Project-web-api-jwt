@@ -56,7 +56,7 @@ namespace Project_web_api_jwt.DataAccessLayer
                     hashtable1.Add("ErrorText", "success ");
                     hashtable1.Add("ErrorCode", "successfull");
                     hashtable1.Add("FieldName", "null");
-                    hashtable1.Add("Fielvalue", "null");
+                    hashtable1.Add("Fieldvalue", "null");
                     
 
 
@@ -76,10 +76,6 @@ namespace Project_web_api_jwt.DataAccessLayer
                     result.rmsg = hashtable1;
 
                 }
-
-               
-
-
             }
             else
             {

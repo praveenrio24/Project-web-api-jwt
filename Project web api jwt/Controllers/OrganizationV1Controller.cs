@@ -26,44 +26,43 @@ namespace Project_web_api_jwt.Controllers
             _configuration = configuration;
         }
 
-       
+
         [HttpPost]
-        [Route("GetOrganization")]
-
-        
-        public List<USP_Praveen_Organization_FetchAll> GetList(USP_Praveen_Organization_FetchAll all)
+        [Route("GetAllOrganization")]
+        public Result GetAllOrganization()
         {
-            bool IsSuccess = true;
-            string ErrorMessage = null;
-            DateTime StartDate = DateTime.UtcNow;
-            List<USP_Praveen_Organization_FetchAll> outputData = null;
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLCONNECT"));
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand("USP_Praveen_Organization_FetchAll", connection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@OrganizationID",all.OrganizationID));
-                command.Parameters.Add(new SqlParameter("@OrganizationName",all.OrganizationName));
-                IDataReader iDr = command.ExecuteReader();
-                outputData = DataReaderMapToList<USP_Praveen_Organization_FetchAll>(iDr);
-                return outputData;
-               
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-         
+            connection.Open();
+            Result result = new Result();
+            List<string> list = new List<string>();
+            Hashtable hashtable = new Hashtable();
+            Hashtable hashtable1 = new Hashtable();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select OrganizationID,OrganizationName,CreatedOn from tbl_Praveen_Organization", connection);
 
-        }
-
-        private List<T> DataReaderMapToList<T>(object iDR)
-        {
-            throw new NotImplementedException();
+            DataTable table = new DataTable();
+            sqlDataAdapter.Fill(table);
+            tbl_Praveen_Organization tbl_Praveen = new tbl_Praveen_Organization();
+            if (table != null)
+            {
+                hashtable.Add("getOrganization", table);
+                hashtable1.Add("ErrorText", "success ");
+                hashtable1.Add("ErrorCode", "successfull");
+                hashtable1.Add("FieldName", "null");
+                hashtable1.Add("Fieldvalue", "null");
+                return new Result { rcode = 200, robj = hashtable, reqID = Guid.NewGuid(), trnID = "E - AAA0001", rmsg = hashtable1 };
+            }
+            else
+            {
+                hashtable1.Add("ErrorText", "Something went Wrong ");
+                hashtable1.Add("ErrorCode", "null");
+                hashtable1.Add("FieldName", "null");
+                hashtable1.Add("Fieldvalue", "null");
+                return new Result { rcode = 500, robj = hashtable, reqID = Guid.NewGuid(), trnID = "E - AAA0001", rmsg = hashtable1 };
+            }
+            return result;
         }
     }
 }
-              
+        
 
          
