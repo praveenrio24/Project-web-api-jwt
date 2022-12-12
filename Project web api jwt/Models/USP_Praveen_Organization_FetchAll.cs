@@ -9,11 +9,7 @@ namespace Project_web_api_jwt.Models
     {
         public int  OrganizationID{ get; set; }
         public string OrganizationName { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime ModifyOn { get; set; }
-        public string ModifyBy { get; set; }
-        public bool IsActive { get; set; }
+  
 
 
     }

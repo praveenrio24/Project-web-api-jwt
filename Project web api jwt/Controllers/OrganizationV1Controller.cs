@@ -31,40 +31,36 @@ namespace Project_web_api_jwt.Controllers
         [Route("GetOrganization")]
 
         
-        public List<USP_Praveen_Organization_FetchAll> GetList()
+        public List<USP_Praveen_Organization_FetchAll> GetList(USP_Praveen_Organization_FetchAll all)
         {
+            bool IsSuccess = true;
+            string ErrorMessage = null;
+            DateTime StartDate = DateTime.UtcNow;
+            List<USP_Praveen_Organization_FetchAll> outputData = null;
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLCONNECT"));
-            connection.Open();
-            USP_Praveen_Organization_FetchAll all = new USP_Praveen_Organization_FetchAll();
-            string procedureName = "USP_Praveen_Organization_FetchAll   ";
-            var result = new List<USP_Praveen_Organization_FetchAll>();
-            SqlDataAdapter da = new SqlDataAdapter(procedureName, connection);
-            da.SelectCommand.CommandType = CommandType.StoredProcedure;
-        
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            List<USP_Praveen_Organization_FetchAll> list1 = new List<USP_Praveen_Organization_FetchAll>();
-            if(dt.Rows.Count>0)                         
+            try
             {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-
-                    all.OrganizationID = Convert.ToInt32(dt.Rows[i]["OrganizationID"]);
-                    all.OrganizationName = dt.Rows[i]["OrganizationName"].ToString();
-                    list1.Add(all);
-                }
-
-                
+                connection.Open();
+                SqlCommand command = new SqlCommand("USP_Praveen_Organization_FetchAll", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("@OrganizationID",all.OrganizationID));
+                command.Parameters.Add(new SqlParameter("@OrganizationName",all.OrganizationName));
+                IDataReader iDr = command.ExecuteReader();
+                outputData = DataReaderMapToList<USP_Praveen_Organization_FetchAll>(iDr);
+                return outputData;
+               
             }
-            if(list1 !=null)
+            catch(Exception ex)
             {
-                return list1;
+                throw ex;
             }
-            else
-            {
-                return null;
-            }
+         
 
+        }
+
+        private List<T> DataReaderMapToList<T>(object iDR)
+        {
+            throw new NotImplementedException();
         }
     }
 }
