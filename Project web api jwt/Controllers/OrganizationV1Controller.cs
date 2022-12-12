@@ -25,41 +25,45 @@ namespace Project_web_api_jwt.Controllers
         {
             _configuration = configuration;
         }
+
+       
         [HttpPost]
         [Route("GetOrganization")]
-        public List<USP_Praveen_Organization_FetchAll> GetList(int OrganizationId, string OrganizationName)
+
+        
+        public List<USP_Praveen_Organization_FetchAll> GetList()
         {
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLCONNECT"));
             connection.Open();
             USP_Praveen_Organization_FetchAll all = new USP_Praveen_Organization_FetchAll();
-            string procedureName = "USP_Praveen_Organization_FetchAll";
+            string procedureName = "USP_Praveen_Organization_FetchAll   ";
             var result = new List<USP_Praveen_Organization_FetchAll>();
-            using (SqlCommand command = new SqlCommand(procedureName, connection))
+            SqlDataAdapter da = new SqlDataAdapter(procedureName, connection);
+            da.SelectCommand.CommandType = CommandType.StoredProcedure;
+        
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            List<USP_Praveen_Organization_FetchAll> list1 = new List<USP_Praveen_Organization_FetchAll>();
+            if(dt.Rows.Count>0)                         
             {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@OrganizationId",all.OrganizationID));
-                command.Parameters.Add(new SqlParameter("@OrganizationName",all.OrganizationName));
-                using (SqlDataReader reader = command.ExecuteReader())
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    while (reader.Read())
-                    {
-                        int id = int.Parse(reader[0].ToString());
-                        string name = reader[1].ToString();
-                        float? age = float.Parse(reader[2]?.ToString());
-                        string Country = reader[3].ToString();
-                        float? savings = float.Parse(reader[4]?.ToString());
-                        USP_Praveen_Organization_FetchAll tmpRecord = new USP_Praveen_Organization_FetchAll()
-                        {
-                            OrganizationID = OrganizationId,
-                            OrganizationName = OrganizationName,
 
-
-                        };
-                        result.Add(tmpRecord);
-                    }
+                    all.OrganizationID = Convert.ToInt32(dt.Rows[i]["OrganizationID"]);
+                    all.OrganizationName = dt.Rows[i]["OrganizationName"].ToString();
+                    list1.Add(all);
                 }
+
+                
             }
-            return result;
+            if(list1 !=null)
+            {
+                return list1;
+            }
+            else
+            {
+                return null;
+            }
 
         }
     }
