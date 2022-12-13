@@ -98,12 +98,11 @@ namespace Project_web_api_jwt.Controllers
                                 hashtable.Add("FieldName", "null");
                                 hashtable.Add("Fielvalue", "null");
                                 result.rmsg = hashtable;
-
-
-
-
                             }
-                            {
+                            { 
+
+
+                            
                                 SqlConnection con = new SqlConnection(_configuration.GetConnectionString("SQLCONNECT").ToString());
                                
                                 AccessLayer accessLayer = new AccessLayer(_configuration, _jwtTokenGeneration);
@@ -117,7 +116,7 @@ namespace Project_web_api_jwt.Controllers
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return new Result{ reqID= Guid.NewGuid() };
             }

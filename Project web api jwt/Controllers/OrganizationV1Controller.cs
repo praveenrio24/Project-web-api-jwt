@@ -20,8 +20,7 @@ namespace Project_web_api_jwt.Controllers
     public class OrganizationV1Controller : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IJwtTokenGeneration _jwtTokenGeneration;
-        public OrganizationV1Controller(IConfiguration configuration, IJwtTokenGeneration jwtTokenGeneration)
+        public OrganizationV1Controller(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -59,7 +58,6 @@ namespace Project_web_api_jwt.Controllers
                 hashtable1.Add("Fieldvalue", "null");
                 return new Result { rcode = 500, robj = hashtable, reqID = Guid.NewGuid(), trnID = "E - AAA0001", rmsg = hashtable1 };
             }
-            return result;
         }
     }
 }
