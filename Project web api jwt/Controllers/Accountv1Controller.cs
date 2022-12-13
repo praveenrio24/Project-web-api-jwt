@@ -47,8 +47,6 @@ namespace Project_web_api_jwt.Controllers
                     hashtable.Add("Fielvalue", "null");
                     result.rmsg = hashtable;
 
-
-
                 }
                 else
                 {

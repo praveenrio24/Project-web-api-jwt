@@ -44,7 +44,7 @@ namespace Project_web_api_jwt.Controllers
             if (table != null)
             {
                 hashtable.Add("getOrganization", table);
-                hashtable1.Add("ErrorText", "success ");
+                hashtable1.Add("ErrorText", "success");
                 hashtable1.Add("ErrorCode", "successfull");
                 hashtable1.Add("FieldName", "null");
                 hashtable1.Add("Fieldvalue", "null");
@@ -58,7 +58,45 @@ namespace Project_web_api_jwt.Controllers
                 hashtable1.Add("Fieldvalue", "null");
                 return new Result { rcode = 500, robj = hashtable, reqID = Guid.NewGuid(), trnID = "E - AAA0001", rmsg = hashtable1 };
             }
+            return result;
         }
+
+        [HttpPost]
+        [Route("GetOrganization")]
+        public Result GetOrganization(int OrganizationID)
+        {
+            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SQLCONNECT"));
+            connection.Open();
+            Result result = new Result();
+            List<string> list = new List<string>();
+            Hashtable hashtable = new Hashtable();
+            Hashtable hashtable1 = new Hashtable();
+            Organization org = new Organization();
+            SqlCommand sqlCommand=new SqlCommand("select OrganizationID, OrganizationName, CreatedOn from tbl_Praveen_Organization where @OrganizationID = OrgainzationID", connection);
+            sqlCommand.Parameters.Add(new SqlParameter("@OragnizationID", OrganizationID));
+            DataTable table = new DataTable();
+            
+            tbl_Praveen_Organization tbl_Praveen = new tbl_Praveen_Organization();
+            if (table != null)
+            {
+                hashtable.Add("getOrganization", table);
+                hashtable1.Add("ErrorText", "success");
+                hashtable1.Add("ErrorCode", "successfull");
+                hashtable1.Add("FieldName", "null");
+                hashtable1.Add("Fieldvalue", "null");
+                return new Result { rcode = 200, robj = hashtable, reqID = Guid.NewGuid(), trnID = "E - AAA0001", rmsg = hashtable1 };
+            }
+            else
+            {
+                hashtable1.Add("ErrorText", "Something went Wrong ");
+                hashtable1.Add("ErrorCode", "null");
+                hashtable1.Add("FieldName", "null");
+                hashtable1.Add("Fieldvalue", "null");
+                return new Result { rcode = 500, robj = hashtable, reqID = Guid.NewGuid(), trnID = "E - AAA0001", rmsg = hashtable1 };
+            }
+            return result;
+        }
+  
     }
 }
         
