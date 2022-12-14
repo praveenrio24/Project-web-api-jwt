@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Project_web_api_jwt.Models
+namespace SwiftAntE2Office.Praveen.WebAPI.Models
 {
     public class Login
     {

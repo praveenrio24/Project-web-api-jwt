@@ -1,15 +1,13 @@
-﻿using Project_web_api_jwt.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using Project_web_api_jwt.Services;
+using SwiftAntE2Office.Praveen.WebAPI.Services;
 using Microsoft.Extensions.Configuration;
 using System.Collections;
+using SwiftAntE2Office.Praveen.WebAPI.Models;
 
-namespace Project_web_api_jwt.DataAccessLayer
+namespace SwiftAntE2Office.Praveen.WebAPI.DataAccessLayer
 {
     public class AccessLayer
     {

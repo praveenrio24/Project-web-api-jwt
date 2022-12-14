@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Project_web_api_jwt.Models;
+using SwiftAntE2Office.Praveen.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_web_api_jwt.Services
+namespace SwiftAntE2Office.Praveen.WebAPI.Services
 {
     public class JwtTokenGeneration: IJwtTokenGeneration
     {

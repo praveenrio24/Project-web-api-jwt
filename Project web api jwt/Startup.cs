@@ -9,14 +9,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
-using Project_web_api_jwt.Services;
+using SwiftAntE2Office.Praveen.WebAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_web_api_jwt
+namespace SwiftAntE2Office.Praveen.WebAPI
 {
     public class Startup
     {

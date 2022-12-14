@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Project_web_api_jwt.DataAccessLayer;
-using Project_web_api_jwt.Models;
-using Project_web_api_jwt.Services;
+using SwiftAntE2Office.Praveen.WebAPI.DataAccessLayer;
+using SwiftAntE2Office.Praveen.WebAPI.Services;
+using SwiftAntE2Office.Praveen.WebAPI.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +12,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Project_web_api_jwt.Controllers
+
+namespace SwiftAntE2Office.Praveen.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -104,7 +105,7 @@ namespace Project_web_api_jwt.Controllers
                                 SqlConnection con = new SqlConnection(_configuration.GetConnectionString("SQLCONNECT").ToString());
                                
                                 AccessLayer accessLayer = new AccessLayer(_configuration, _jwtTokenGeneration);
-                                result = accessLayer.Login(con,login);
+                                result = accessLayer.Login(con, login);
 
 
                             }

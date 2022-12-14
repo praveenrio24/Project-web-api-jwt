@@ -8,8 +8,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
-using Project_web_api_jwt.Services;
-using Project_web_api_jwt.Models;
+using SwiftAntE2Office.Praveen.WebAPI.Services;
+using SwiftAntE2Office.Praveen.WebAPI.Models;
 using System.Collections;
 
 namespace Project_web_api_jwt.Controllers

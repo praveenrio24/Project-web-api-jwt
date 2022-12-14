@@ -1,6 +1,7 @@
-﻿using Project_web_api_jwt.Models;
+﻿
+using SwiftAntE2Office.Praveen.WebAPI.Models;
 
-namespace Project_web_api_jwt.Services
+namespace SwiftAntE2Office.Praveen.WebAPI.Services
 {
     public interface IJwtTokenGeneration
     {
